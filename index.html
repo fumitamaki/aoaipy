@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat with Azure OpenAI</title>
+</head>
+<body>
+    <div>
+        <textarea id="userInput" placeholder="Enter your prompt here"></textarea>
+        <button onclick="sendPrompt()">Send</button>
+    </div>
+    <div id="chatArea">
+        <!-- ここにチャットの履歴が表示されます -->
+    </div>
+
+    <script>
+        async function sendPrompt() {
+            var userInput = document.getElementById("userInput").value;
+            var chatArea = document.getElementById("chatArea");
+
+            // ユーザーの入力を表示
+            chatArea.innerHTML += '<div>User: ' + userInput + '</div>';
+
+            // バックエンドにリクエストを送信
+            const response = await fetch('/send_prompt', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ prompt: userInput })
+            });
+
+            const data = await response.json();
+
+            // AIからの応答を表示
+            chatArea.innerHTML += '<div>AI: ' + data.response + '</div>';
+        }
+    </script>
+</body>
+</html>
