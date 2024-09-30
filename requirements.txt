@@ -1,2 +1,5 @@
 flask
 requests
+
+
+https://chatgpt.com/share/66fa1bd1-7ea8-8006-b893-59d1890de64e
